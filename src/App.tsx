@@ -21,13 +21,26 @@ function App() {
     const getRates = async () => {
       try {
         const data = await axios.get(
-          'http://data.fixer.io/api/latest?access_key=77808a15fa9c62e7428c3c4157a03e1b&base=EUR&symbols=TRY'
+          'https://openexchangerates.org/api/latest.json?app_id=4c0dcadfda5d4675b8eb28379744a08e&base=USD&symbols=TRY,EUR&prettyprint=false&show_alternative=false'
         );
         const yesterdayData = await axios.get(
-          `http://data.fixer.io/api/${formatYesterday}?access_key=77808a15fa9c62e7428c3c4157a03e1b&base=EUR&symbols=TRY`
+          `https://openexchangerates.org/api/historical/${formatYesterday}.json?app_id=4c0dcadfda5d4675b8eb28379744a08e&base=USD&symbols=TRY,EUR&show_alternative=false&prettyprint=false`
         );
-        setEuroToday(data.data.rates.TRY);
-        setEuroYesterday(yesterdayData.data.rates.TRY);
+        const rates = Number(
+          (
+            ((100 + (100 - data.data.rates.EUR * 100)) * data.data.rates.TRY) /
+            100
+          ).toFixed(2)
+        );
+        const yesterdayRates = Number(
+          (
+            ((100 + (100 - yesterdayData.data.rates.EUR * 100)) *
+              yesterdayData.data.rates.TRY) /
+            100
+          ).toFixed(2)
+        );
+        setEuroToday(rates);
+        setEuroYesterday(yesterdayRates);
       } catch (err) {
         alert(err);
       }
