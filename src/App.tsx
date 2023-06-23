@@ -47,31 +47,34 @@ function App() {
       <div className="flex-grow flex flex-col justify-center items-center sm:gap-12 gap-4">
         {euroYesterday < euroToday ? (
           <>
-            <h2 className="text-2xl sm:text-4xl">
+            <h2 className="text-2xl sm:text-4xl text-center">
               Kırdı 😱😱😱 Euro bey ne yapıyorsunuz..!
             </h2>
-            <m.img
-              animate={{ x: 0, rotate: '360deg' }}
-              initial={{ x: '300%', rotate: '0deg' }}
-              transition={{ duration: 2 }}
-              className="h-96 overflow-hidden"
-              src={Kirdi}
-              alt="Kırdı :(("
-            />
+            <div className="overflow-hidden">
+              <m.img
+                className="h-52"
+                animate={{ x: 0, rotate: '360deg' }}
+                initial={{ x: '300%', rotate: '0deg' }}
+                transition={{ duration: 2 }}
+                src={Kirdi}
+                alt="Kırdı :(("
+              />
+            </div>
             <p className="text-md">Dün: 1€ = {euroYesterday}₺</p>
             <p className="text-2xl">Bugün: 1€ = {euroToday}₺ </p>
           </>
         ) : (
           <>
             <h2 className="text-2xl sm:text-4xl">Kırmadı 🥲</h2>
-            <m.img
-              className="overflow-hidden"
-              animate={{ x: 0, rotate: '360deg' }}
-              initial={{ x: '300%', rotate: '0deg' }}
-              transition={{ duration: 2 }}
-              src={Kirmadi}
-              alt="Kırmadı :))"
-            />
+            <div className="overflow-hidden">
+              <m.img
+                animate={{ x: 0, rotate: '360deg' }}
+                initial={{ x: '300%', rotate: '0deg' }}
+                transition={{ duration: 2 }}
+                src={Kirmadi}
+                alt="Kırmadı :))"
+              />
+            </div>
             <p className="text-md">Dün: 1€ = {euroYesterday}₺</p>
             <p className="text-2xl">Bugün: 1€ = {euroToday}₺ </p>
           </>
