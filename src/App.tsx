@@ -52,7 +52,7 @@ function App() {
             </h2>
             <div className="overflow-hidden">
               <m.img
-                className="h-52"
+                className="sm:h-96 h-52"
                 animate={{ x: 0, rotate: '360deg' }}
                 initial={{ x: '300%', rotate: '0deg' }}
                 transition={{ duration: 2 }}
