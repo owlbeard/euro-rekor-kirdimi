@@ -40,36 +40,44 @@ function App() {
     getRates();
   }, []);
   return (
-    <div className="h-screen flex flex-col justify-center items-center gap-12">
-      <h1 className="text-6xl">Euro Bugün Rekor Kırdı Mı?</h1>
-      {euroYesterday < euroToday ? (
-        <>
-          <h2 className="text-4xl">Kırdı 😱😱😱 Euro bey ne yapıyorsunuz..!</h2>
-          <m.img
-            animate={{ x: 0, rotate: '360deg' }}
-            initial={{ x: '300%', rotate: '0deg' }}
-            transition={{ duration: 2 }}
-            className="h-96"
-            src={Kirdi}
-            alt="Kırdı :(("
-          />
-          <p className="text-md">Dün: 1€ = {euroYesterday}₺</p>
-          <p className="text-2xl">Bugün: 1€ = {euroToday}₺ </p>
-        </>
-      ) : (
-        <>
-          <h2 className="text-4xl">Kırmadı 🥲</h2>
-          <m.img
-            animate={{ x: 0, rotate: '360deg' }}
-            initial={{ x: '300%', rotate: '0deg' }}
-            transition={{ duration: 2 }}
-            src={Kirmadi}
-            alt="Kırmadı :))"
-          />
-          <p className="text-md">Dün: 1€ = {euroYesterday}₺</p>
-          <p className="text-2xl">Bugün: 1€ = {euroToday}₺ </p>
-        </>
-      )}
+    <div className="container mx-auto h-dvh flex flex-col justify-center items-center ">
+      <h1 className="text-4xl sm:text-6xl text-center">
+        Euro Bugün Rekor Kırdı Mı?
+      </h1>
+      <div className="flex-grow flex flex-col justify-center items-center sm:gap-12 gap-4">
+        {euroYesterday < euroToday ? (
+          <>
+            <h2 className="text-2xl sm:text-4xl">
+              Kırdı 😱😱😱 Euro bey ne yapıyorsunuz..!
+            </h2>
+            <m.img
+              animate={{ x: 0, rotate: '360deg' }}
+              initial={{ x: '300%', rotate: '0deg' }}
+              transition={{ duration: 2 }}
+              className="h-96 overflow-hidden"
+              src={Kirdi}
+              alt="Kırdı :(("
+            />
+            <p className="text-md">Dün: 1€ = {euroYesterday}₺</p>
+            <p className="text-2xl">Bugün: 1€ = {euroToday}₺ </p>
+          </>
+        ) : (
+          <>
+            <h2 className="text-2xl sm:text-4xl">Kırmadı 🥲</h2>
+            <m.img
+              className="overflow-hidden"
+              animate={{ x: 0, rotate: '360deg' }}
+              initial={{ x: '300%', rotate: '0deg' }}
+              transition={{ duration: 2 }}
+              src={Kirmadi}
+              alt="Kırmadı :))"
+            />
+            <p className="text-md">Dün: 1€ = {euroYesterday}₺</p>
+            <p className="text-2xl">Bugün: 1€ = {euroToday}₺ </p>
+          </>
+        )}
+      </div>
+      <p>Copyright © 2023 || Ömer F. Altun</p>
     </div>
   );
 }
