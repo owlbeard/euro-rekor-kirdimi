@@ -6,6 +6,8 @@ import Kirmadi from './assets/kirmadi.jpeg';
 import { useEffect, useState } from 'react';
 import { motion as m } from 'framer-motion';
 
+const SUPER_DUPER_SECRET_API_KEY = import.meta.env.VITE_CURRENCY_KEY;
+
 function App() {
   const [euroToday, setEuroToday] = useState(0);
   const [euroYesterday, setEuroYesterday] = useState(0);
@@ -15,29 +17,19 @@ function App() {
     const month = date.getMonth();
     const day = date.getDate();
     const yesterday = subDays(new Date(year, month, day), 1);
-
     const formatYesterday = format(yesterday, 'yyyy-MM-dd');
-    console.log(formatYesterday);
+
     const getRates = async () => {
       try {
         const data = await axios.get(
-          'https://openexchangerates.org/api/latest.json?app_id=4c0dcadfda5d4675b8eb28379744a08e&base=USD&symbols=TRY,EUR&prettyprint=false&show_alternative=false'
+          `https://api.currencybeacon.com/v1/latest?api_key=${SUPER_DUPER_SECRET_API_KEY}&base=EUR&symbols=TRY`
         );
         const yesterdayData = await axios.get(
-          `https://openexchangerates.org/api/historical/${formatYesterday}.json?app_id=4c0dcadfda5d4675b8eb28379744a08e&base=USD&symbols=TRY,EUR&show_alternative=false&prettyprint=false`
+          `https://api.currencybeacon.com/v1/historical?api_key=${SUPER_DUPER_SECRET_API_KEY}&base=EUR&symbols=TRY&date=${formatYesterday}`
         );
-        const rates = Number(
-          (
-            ((100 + (100 - data.data.rates.EUR * 100)) * data.data.rates.TRY) /
-            100
-          ).toFixed(2)
-        );
+        const rates = Number(data.data.response.rates.TRY.toFixed(2));
         const yesterdayRates = Number(
-          (
-            ((100 + (100 - yesterdayData.data.rates.EUR * 100)) *
-              yesterdayData.data.rates.TRY) /
-            100
-          ).toFixed(2)
+          yesterdayData.data.response.rates.TRY.toFixed(2)
         );
         setEuroToday(rates);
         setEuroYesterday(yesterdayRates);
